@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <style>
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle!important;
+        }
+        #room-table a{
+            text-decoration: none;
+        }
+        .table input{
+            border-left-width: 0px;
+            border-top-width: 0px;
+            border-right-width: 0px;
+            border-bottom-width: 1px;
+            width: 35px;
+            font-size: 18px;
+            outline: medium;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<script type="text/javascript" th:inline="javascript">
+
+    $(function(){
+        $("#save").click(function (){
+            var g1 =parseInt($("#grade1").val());
+            var g2 =parseInt($("#grade2").val());
+            var g3 =parseInt($("#grade3").val());
+            var g4 =parseInt($("#grade4").val());
+            var g5 = g1+g2+g3+g4;
+            $("#grade5").val(g5);
+
+            if((g1>=0&&g1<=25)&&(g2>=0&&g2<=25)&&(g3>=0&&g3<=25)&&(g4>=0&&g4<=25)){
+
+                $.post("/addassess",{"stu_assess":$("#grade5").val(),"stu_num":$("#snum").val()},function (date){
+
+                    if(date.toString()=="true"){
+                        alert("评价成功！")
+                    }
+                })
+            }else {
+                alert("您评价的分数有误，请认真看准评价准则！");
+            }
+
+        });
+    });
+
+
+
+</script>
+
+<body>
+<div th:insert="~{commons/commons.html::topbar(sign='main.html')}"></div>
+
+<div id="index-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">华中师范大学计算机学院实习教师评分表</h3>
+                    </div>
+                    <div class="panel panel-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-1">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered  table-striped " id="room-table">
+                                            <tr>
+                                                <th>项目</th>
+                                                <th>要素</th>
+                                                <th style="width: 600px">参照等级标准</th>
+                                                <th>等级</th>
+                                                <th>标准评分</th>
+                                                <th>得分</th>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="4">教<br>师<br>工<br>作<br>量<br>25<br>分</td>
+                                                <td rowspan="4">讲<br>课<br>辅<br>导<br>指<br>导<br>等</td>
+                                                <td>现任职以来，尽职尽责完成本岗位应承担得教师工作量的95%以上。</td>
+                                                <td>A</td>
+                                                <td>25-21</td>
+                                                <td rowspan="4">
+                                                    <div >
+                                                        <input type="text" id="grade1">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>现任职以来，尽职尽责完成本岗位应承担得教师工作量的94%~80%。</td>
+                                                <td>B</td>
+                                                <td>20-16</td>
+                                            </tr>
+                                            <tr>
+                                                <td>现任职以来，尽职尽责完成本岗位应承担得教师工作量的79%~60%。</td>
+                                                <td>C</td>
+                                                <td>15-11</td>
+                                            </tr>
+                                            <tr>
+                                                <td>现任职以来，尽职尽责完成本岗位应承担得教师工作量的59%以下。</td>
+                                                <td>D</td>
+                                                <td>10-0</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="4">教<br>学<br>态<br>度<br>25<br>分</td>
+                                                <td rowspan="4">治<br>学<br>教<br>改<br>研<br>究<br>及<br>备<br>课</td>
+                                                <td>教学态度认真，治学严谨，努力钻研教学法和教学规律，总结教学经验，注意征求学生意见，改进教学。</td>
+                                                <td>A</td>
+                                                <td>25-21</td>
+                                                <td rowspan="4">
+                                                    <div >
+                                                        <input type="text" id="grade2">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>教学态度较认真，治学较严谨，能摸索教学法和教学规律，时常总结教学经验，改进教学。</td>
+                                                <td>B</td>
+                                                <td>20-16</td>
+                                            </tr>
+                                            <tr>
+                                                <td>教学态度端正，治学尚严谨，能总结教学经验，有时能征求学生意见，教学有改进。</td>
+                                                <td>C</td>
+                                                <td>15-11</td>
+                                            </tr>
+                                            <tr>
+                                                <td>治学不够严谨，教学积极性不够高，征求学生意见少，教学改进不大。</td>
+                                                <td>D</td>
+                                                <td>10-0</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="4">教<br>学<br>方<br>法<br>25<br>分</td>
+                                                <td rowspan="4">治<br>学<br>教<br>改<br>研<br>究<br>及<br>备<br>课</td>
+                                                <td>实行启发式教学，注重能力培养，善于因材施教，根据课程特点，善于利用现代化各种教学手段。</td>
+                                                <td>A</td>
+                                                <td>25-21</td>
+                                                <td rowspan="4">
+                                                    <div>
+                                                        <input type="text" id="grade3">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>能实行启发式教学，较注重能力培养，能因材施教，根据课程特点，能利用现代化各种教学手段。</td>
+                                                <td>B</td>
+                                                <td>20-16</td>
+                                            </tr>
+                                            <tr>
+                                                <td>启发式教学欠佳，尚能注重能力培养，注意因材施教，一般还能利用现代化各种教学手段。</td>
+                                                <td>C</td>
+                                                <td>15-11</td>
+                                            </tr>
+                                            <tr>
+                                                <td>教学方法呆板，没有启发性，不注重学生能力培养，不能因材施教，缺少利用现代化各种教学手段。</td>
+                                                <td>D</td>
+                                                <td>10-0</td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="4">教<br>学<br>内<br>容<br>25<br>分</td>
+                                                <td rowspan="4">大<br>纲<br>内<br>容<br>讲<br>解<br>及<br>联<br>系<br>实<br>际<br>培<br>养</td>
+                                                <td>全面达到教学大纲规定的要求，内容丰富，观点正确，讲授不出错且能紧密联系实际，结合课程特点提高学生实践技能。</td>
+                                                <td>A</td>
+                                                <td>25-21</td>
+                                                <td rowspan="4">
+                                                    <div >
+                                                        <input type="text" id="grade4">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>达到教学大纲规定的要求，内容较充实，讲授很少出错，能联系实际，能结合课程特点提高学生实践技能。</td>
+                                                <td>B</td>
+                                                <td>20-16</td>
+                                            </tr>
+                                            <tr>
+                                                <td>基本达到教学大纲规定的要求，部分内容陈旧，讲授无大出错，联系实际较少。</td>
+                                                <td>C</td>
+                                                <td>15-11</td>
+                                            </tr>
+                                            <tr>
+                                                <td>未达到教学大纲规定的要求，内容贫乏、陈旧，错误观点较多，讲授经常出错，理论与实际脱节较严重，不重视学生实践技能的培养。</td>
+                                                <td>D</td>
+                                                <td>10-0</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"></td>
+                                                <td colspan="3">合&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计</td>
+                                                <td>
+                                                    <div>
+                                                        <input type="text" id="grade5" value="" style="border: none">
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                        <div style="text-align: center">
+                                            <a id="save" class="btn btn-primary" >提交</a>
+                                        </div>
+                                        <div hidden>
+                                            <input type="text" id="snum" th:value="${session.loginNum}">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="springboot-date:war">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="springboot-date_war.war">
+      <element id="artifact" artifact-name="springboot-date:war exploded" />
+    </root>
+  </artifact>
+</component>

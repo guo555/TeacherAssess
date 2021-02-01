@@ -1,0 +1,14 @@
+server:
+  port: 9090
+
+
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://47.110.248.91:3306/sys?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+mybatis:
+  type-aliases-package: com.guo.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
